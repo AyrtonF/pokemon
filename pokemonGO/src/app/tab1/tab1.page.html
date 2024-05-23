@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Caçar Pokemons
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Buscar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-input
+        [(ngModel)]="buscarPokemonArea"
+        [counter]="true"
+        fill="solid"
+        helperText="Área para buscar por Pokemon"
+        label-placement="floating"
+        label="CEP"
+        maxlength="8"
+        placeholder="22555888"
+        type="text"
+      ></ion-input>
+   
+      <ion-button
+        expand="block"
+        fill="solid"
+        (click)="buscarPokemon()"
+      >
+        Buscar por Pokemon
+        <ion-icon name="search" slot="end"></ion-icon>
+      </ion-button>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          {{ this.areaBusca.logradouro + ', ' +
+             this.areaBusca.bairro + ', ' +
+             this.areaBusca.localidade + ' - ' +
+             this.areaBusca.uf }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content>
