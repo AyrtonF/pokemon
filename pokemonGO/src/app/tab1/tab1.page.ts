@@ -11,7 +11,7 @@ import { json } from 'express';
 })
 
 export class Tab1Page {
-buscarPokemonArea:string = '52280280'
+buscarPokemonArea:string = ''
 areaBusca:any={
 
 bairro: '',
