@@ -12,18 +12,21 @@ export class Tab2Page implements OnInit {
   pokemon: any;
   resultadoBatalha: string = '';
   resultadoCor: string = '';
-  pokemonTab1: any;
 
   constructor(
     public photoService: PhotoService,
     private pokeAPIService: PokeAPIService,
     private pokemonDataService: PokemonDataService
-  ) {
-    this.pokemonDataService.currentPokemon.subscribe(pokemon => this.pokemonTab1 = pokemon);
-  }
+  ) {}
+
 
   ngOnInit() {
-    this.buscarPokemonAleatorio();
+    this.pokemon = this.pokemonDataService.currentPokemon;
+    if (!this.pokemon) {
+      this.buscarPokemonAleatorio();
+    } else {
+      this.sistemaDeBatalha();
+    }
   }
 
   adicionarFotoNaGaleria() {
@@ -38,27 +41,30 @@ export class Tab2Page implements OnInit {
   }
 
   sistemaDeBatalha() {
-    if (!this.pokemonTab1) {
+    const capturedPokemons = this.pokemonDataService.getCapturedPokemons();
+const capturedPokemon = capturedPokemons[capturedPokemons.length - 1];
+
+    if (!capturedPokemon) {
       this.resultadoBatalha = 'Nenhum Pokémon para comparar.';
       this.resultadoCor = 'gray';
       return;
     }
 
-    const habilidadesTab1 = this.pokemonTab1.abilities.length || 0;
+    const habilidadesTab1 = capturedPokemon.abilities.length || 0;
     const habilidadesTab2 = this.pokemon.abilities.length;
 
     if (habilidadesTab2 === habilidadesTab1) {
       this.resultadoBatalha = 'Empate';
-      this.pokemonDataService.updatePokemonStatus(this.pokemon, this.resultadoBatalha)
+      this.pokemonDataService.updatePokemonStatus(capturedPokemon.name, 'Empate');
       this.resultadoCor = 'warning';
     } else if (habilidadesTab2 > habilidadesTab1) {
       this.resultadoBatalha = 'Ganhou';
-      this.pokemonDataService.updatePokemonStatus(this.pokemon, this.resultadoBatalha)
-      this.resultadoCor = 'success';
+      this.pokemonDataService.updatePokemonStatus(capturedPokemon.name, 'Perdeu');
+      this.resultadoCor = 'danger';
     } else {
       this.resultadoBatalha = 'Perdeu';
-      this.pokemonDataService.updatePokemonStatus(this.pokemon, this.resultadoBatalha)
-      this.resultadoCor = 'danger';
+      this.pokemonDataService.updatePokemonStatus(capturedPokemon.name, 'Ganhou');
+      this.resultadoCor = 'success';
     }
   }
 }

@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Batalha de Pokémons
-    </ion-title>
+    <ion-title>Batalha de Pokémons</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,8 +12,8 @@
   </ion-header>
 
   <ion-card *ngIf="pokemon">
-    <ion-card-header >
-      <ion-card-title  color={{resultadoCor}} >{{ pokemon.name | uppercase }} - {{ resultadoBatalha }}</ion-card-title>
+    <ion-card-header>
+      <ion-card-title color={{resultadoCor}}>{{ pokemon.name | uppercase }} - {{ resultadoBatalha }}</ion-card-title>
       <ion-img [src]="pokemon.sprites.front_default"></ion-img>
     </ion-card-header>
     <ion-card-content>
@@ -38,4 +36,9 @@
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-button expand="block" fill="solid" (click)="buscarPokemonAleatorio()">
+    Batalhar
+    <ion-icon name="sword" slot="end"></ion-icon>
+  </ion-button>
 </ion-content>

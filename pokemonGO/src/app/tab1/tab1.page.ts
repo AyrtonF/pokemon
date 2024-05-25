@@ -3,6 +3,7 @@ import { ViaCEPService } from './../services/http-via-cep.service';
 import { PokeAPIService } from './../services/http-poke-api.service';
 import { PokemonDataService } from '../services/pokemon-data-service.service';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -18,7 +19,7 @@ export class Tab1Page {
   };
   pokemon: any;
   showResult: boolean = false;
-  captured: boolean = false; // Inicializando a propriedade 'captured'
+  captured: boolean = false;
 
   constructor(
     private pokeAPIService: PokeAPIService,
@@ -40,7 +41,6 @@ export class Tab1Page {
       if (this.checkCaptureChance()) {
         this.capturePokemon();
       }
-      this.pokemonDataService.changePokemon(data); // Atualiza o serviço com o novo Pokémon
     });
   }
 
@@ -49,8 +49,7 @@ export class Tab1Page {
   }
 
   capturePokemon() {
-    
-    this.captured = true; // Marcando o Pokémon como capturado
+    this.captured = true;
     this.pokemonDataService.capturePokemon(this.pokemon);
   }
 }

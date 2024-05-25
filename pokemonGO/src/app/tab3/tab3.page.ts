@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonDataService } from '../services/pokemon-data-service.service';
-import { Tab2Page } from '../tab2/tab2.page';
 
 @Component({
   selector: 'app-tab3',
@@ -13,20 +12,18 @@ export class Tab3Page implements OnInit {
   constructor(private pokemonDataService: PokemonDataService) {}
 
   ngOnInit() {
-    this.pokemonDataService.capturedPokemons.subscribe(pokemons => {
-      this.capturedPokemons = pokemons;
-    });
+    this.capturedPokemons = this.pokemonDataService.getCapturedPokemons();
   }
-  
-  
 
   getBadgeColor(value: number): string {
+
+
     if (value > 0) {
-      return 'success'; // verde
-    } else if (value < 0) {
-      return 'danger'; // vermelho
+      return 'success'; // verde para vitórias
+    } else if (value > 0) {
+      return 'danger'; // vermelho para derrotas
     } else {
-      return 'warning'; // amarelo
+      return 'warning'; // amarelo para empates
     }
   }
 }
