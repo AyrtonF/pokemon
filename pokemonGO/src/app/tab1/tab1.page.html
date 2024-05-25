@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Caçar Pokemons
-    </ion-title>
+    <ion-title>Caçar Pokemons</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,49 +24,45 @@
         placeholder="exemplo: 22555888"
         type="text"
       ></ion-input>
-   
-      <ion-button
-        expand="block"
-        fill="solid"
-        (click)="buscarPokemon()"
-      >
+
+      <ion-button expand="block" fill="solid" (click)="buscarPokemon()">
         Buscar por Pokemon
         <ion-icon name="search" slot="end"></ion-icon>
       </ion-button>
     </ion-card-header>
   </ion-card>
 
-  <ion-card *ngIf="areaBusca && areaBusca.logradouro && areaBusca.bairro && areaBusca.localidade && areaBusca.uf">
+  <ion-card *ngIf="areaBusca.logradouro && areaBusca.bairro && areaBusca.localidade && areaBusca.uf">
     <ion-card-content>
       <ion-list>
         <ion-item>
-          {{ areaBusca.logradouro  + areaBusca.bairro  + areaBusca.localidade + areaBusca.uf }}
+          {{ areaBusca.logradouro + areaBusca.bairro + areaBusca.localidade + areaBusca.uf }}
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
-  
 
-  <ion-card>
+  <ion-card *ngIf="showResult">
     <ion-card-header>
-      <ion-card-title>{{'bulbasaur' | uppercase}}</ion-card-title>
-      <ion-img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" >
-
-      </ion-img>
+      <ion-card-title>{{ pokemon?.name | uppercase }}</ion-card-title>
+      <ion-img [src]="pokemon?.sprites.front_default"></ion-img>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item>
-          <ion-label>Abilities: 2</ion-label>
+        <ion-item *ngFor="let ability of pokemon?.abilities">
+          <ion-label>Ability: {{ ability.ability.name }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Heigth: 7</ion-label>
+          <ion-label>Height: {{ pokemon?.height }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Weigth: 69</ion-label>
+          <ion-label>Weight: {{ pokemon?.weight }}</ion-label>
         </ion-item>
       </ion-list>
+      <ion-item>
+        <ion-label *ngIf="captured">You have captured the Pokémon!</ion-label>
+        <ion-label *ngIf="!captured">The Pokémon escaped!</ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

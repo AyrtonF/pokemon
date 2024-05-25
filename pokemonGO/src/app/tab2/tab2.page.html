@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Batalha de Pokémons
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,33 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Batalha</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card *ngIf="pokemon">
+    <ion-card-header >
+      <ion-card-title  color={{resultadoCor}} >{{ pokemon.name | uppercase }} - {{ resultadoBatalha }}</ion-card-title>
+      <ion-img [src]="pokemon.sprites.front_default"></ion-img>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let ability of pokemon.abilities">
+          <ion-label>Ability: {{ ability.ability.name }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Height: {{ pokemon.height }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Weight: {{ pokemon.weight }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="adicionarFotoNaGaleria()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

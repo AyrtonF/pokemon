@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class PokeAPIService {
-
   constructor(private httpClient: HttpClient) {}
 
-  getPokeAPIService(id: number = Math.floor(Math.random() * 100)) {
-    return this.httpClient.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  getRandomPokemon() {
+    const randomId = Math.floor(Math.random() * 898) + 1; // Gera um ID aleatório entre 1 e 898
+    return this.httpClient.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
   }
 }
