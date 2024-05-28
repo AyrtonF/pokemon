@@ -22,15 +22,15 @@
             <ion-img [src]="pokemon.sprites.front_default"></ion-img>
             <ion-item>
               <ion-label color="success">Vitórias:</ion-label>
-              <ion-badge [color]="getBadgeColor(pokemon.victories)" color="success">{{ pokemon.victories }}</ion-badge>
+              <ion-badge color="success">{{ pokemon.victories }}</ion-badge>
             </ion-item>
             <ion-item>
               <ion-label color="danger">Derrotas:</ion-label>
-              <ion-badge [color]="getBadgeColor(pokemon.defeats)" color="danger">{{ pokemon.defeats }}</ion-badge>
+              <ion-badge color="danger">{{ pokemon.defeats }}</ion-badge>
             </ion-item>
             <ion-item>
               <ion-label color="warning">Empates:</ion-label>
-              <ion-badge [color]="getBadgeColor(pokemon.draws)" color="warning">{{ pokemon.draws }}</ion-badge>
+              <ion-badge color="warning">{{ pokemon.draws }}</ion-badge>
             </ion-item>
           </ion-card-content>
         </ion-card>
